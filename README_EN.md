@@ -1,11 +1,11 @@
 # QRCode2
 ---
-[中文](??) | English
+[中文](https://github.com/LZLuzhuo/QRCode2/blob/master/README.md) | English
 
 This library is used to generate a variety of common QRCode.
 
 ## Guide package
-??
+Copy `qrcode 2.1.0.jar` and` zxing3.2.1.jar` to the project, Build Pah can be used.
 
 
 ## Use
@@ -122,7 +122,7 @@ You can use the generated two-dimensional code to use some filter algorithms, or
 
 Luzhuo  
 Email: `LZ.Luzhuo@gmail.com`  
-Blog: `??`  
+Blog: `http://blog.csdn.net/Rozol/article/details/52831504`  
 
 
 ## License

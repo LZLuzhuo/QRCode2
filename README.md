@@ -1,11 +1,11 @@
 # 二维码
 ---
-中文 | [English](??)
+中文 | [English](https://github.com/LZLuzhuo/QRCode2/blob/master/README_EN.md)
 
 该库用于生成各种常见的二维码
 
 ## 导包
-??
+拷贝 `qrcode2.1.0.jar` 和 `zxing3.2.1.jar` 到项目中, Build Pah 即可使用.
 
 
 ## 使用
@@ -122,7 +122,7 @@
 
 Luzhuo  
 Email: `LZ.Luzhuo@gmail.com`  
-Blog: `??`  
+Blog: `http://blog.csdn.net/Rozol/article/details/52831504`  
 
 
 ## License
