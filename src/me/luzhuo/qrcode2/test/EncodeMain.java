@@ -33,11 +33,11 @@ import me.luzhuo.qrcode2.encode.QRWriteToFile;
  *
  */
 public class EncodeMain {
-	private static String contents = "ZXing 二维码内容1234!"; // 二维码内容 
-	private static int width = 430; // 二维码图片宽度
-	private static int height = 430; // 二维码图片高度
+	private static String contents = "作者:Luzhuo   博客:http://blog.csdn.net/Rozol   Github:https://github.com/lzluzhuo"; // 二维码内容 
+	private static int width = 340; // 二维码图片宽度
+	private static int height = 340; // 二维码图片高度
 	private static File savefile = new File("C:\\我的电脑\\" + File.separator + System.currentTimeMillis() + ".png"); // 保存文件
-	private static File basemapfile =  new File("C:\\我的电脑\\logo.jpg"); // 底图
+	private static File basemapfile =  new File("C:\\我的电脑\\logo2.jpg"); // 底图
 	private static File logofile = new File("C:\\我的电脑\\logo.jpg"); // logo
 	
 	public static void main(String[] args) throws WriterException, IOException {
@@ -50,11 +50,11 @@ public class EncodeMain {
     	QRCode qrcode = new QRCode().createQRCode(contents);
     	
     	// 2. 样式类处理QRCode源数据组
-    	QRStyle qrstyle = new QRStyle(qrcode, QRStyles.Default);
+    	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.Default);
     	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.OnlyBlack);
     	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultTranslucent);
     	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultTranslucentBorder);
-    	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultPoint);
+    	QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultPoint);
     	
     	// 3. 将QRCode生成图形数据阵
     	QRMatrix qrMatrix = new QRMatrix().createMatrix(qrcode, width, height, qrstyle);
