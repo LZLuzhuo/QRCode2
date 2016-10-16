@@ -20,6 +20,7 @@ package me.luzhuo.qrcode2.encode;
  *
  */
 public class QRStyle {
+	/** 样式组 */
 	private QRStyleGroup styleGroup;
 	
 	public enum QRStyles{
@@ -30,7 +31,9 @@ public class QRStyle {
 		/** 默认半透明, Default的半透明版, 白色和黑色块都为半透明, 适用于有彩色背景图的 */
 		DefaultTranslucent,
 		/** 默认半透明并带有识别框, 比DefaultTranslucent版多了个识别框, 适用于有彩色背景图的 */
-		DefaultTranslucentBorder
+		DefaultTranslucentBorder,
+		/** 默认点, Default的点阵版, 除三个识别部位点阵外, 其余均为点阵 */
+		DefaultPoint
 	}
 	
 	public enum QRStyleGroup{
@@ -50,6 +53,7 @@ public class QRStyle {
 			break;
 		case DefaultTranslucent:
 		case DefaultTranslucentBorder:
+		case DefaultPoint:
 			styleGroup = QRStyleGroup.TranslucentColor;
 			break;
 		}
@@ -70,6 +74,9 @@ public class QRStyle {
 					if(qrarray[x][y] == 0){ qrarray[x][y] = QRColor.Empty; }
 					else if(qrarray[x][y] == 1){ qrarray[x][y] = QRColor.Black; }
 					
+				}else if(style == QRStyles.DefaultPoint){	
+					if(qrarray[x][y] == 0){ qrarray[x][y] = QRColor.PointWhite80; }
+					else if(qrarray[x][y] == 1){ qrarray[x][y] = QRColor.PointBlack80; }
 				}else{
 					if(qrarray[x][y] == 0){ qrarray[x][y] = QRColor.White; }
 					else if(qrarray[x][y] == 1){ qrarray[x][y] = QRColor.Black; }
@@ -77,7 +84,7 @@ public class QRStyle {
 			}
 		}
 		
-		if(style == QRStyles.DefaultTranslucentBorder){
+		if(style == QRStyles.DefaultTranslucentBorder || style == QRStyles.DefaultPoint){
 			// 对数组进行扩展
 			byte[][] newQR = new byte[qrarray.length + 2][];
 			int newQRLength = newQR.length; // 新数组的第一维长度
@@ -131,4 +138,5 @@ public class QRStyle {
 	public QRStyleGroup getGroup(){
 		return styleGroup;
 	}
+	
 }

@@ -34,8 +34,10 @@ public class QRMatrix {
 		
 		if(qrcode.getWidth() > width || qrcode.getHeight() > height) throw new IllegalArgumentException("Found picture size too small.");
 		
-		if(style.getGroup() == QRStyleGroup.FullColor) fullColor(qrcode, width, height);
-		if(style.getGroup() == QRStyleGroup.TranslucentColor) translucentColor(qrcode, width, height);
+		this.matrixHeight = this.matrixWidth = Math.min(width, height);
+		
+		if(style.getGroup() == QRStyleGroup.FullColor) fullColor(qrcode);
+		if(style.getGroup() == QRStyleGroup.TranslucentColor) translucentColor(qrcode);
 		
 		return this;
 	}
@@ -43,17 +45,14 @@ public class QRMatrix {
 	/**
 	 * 全色块
 	 */
-	private void fullColor(QRCode qrcode, int width, int height){
-		this.matrixWidth = width;
-		this.matrixHeight = height;
-		
+	private void fullColor(QRCode qrcode){
 		int qrWidth = qrcode.getWidth();
 		int qrHeight = qrcode.getHeight();
 		
-	    this.imageMeatrix = new int[width][height];
-	    this.ratio = Math.min(width, height) / Math.max(qrWidth + 2, qrHeight + 2); // 计算比例
-	    this.left = (width - qrWidth * ratio) / 2 - 1; // 计算左右边距
-	    this.top = (height - qrHeight * ratio) / 2 - 1;
+	    this.imageMeatrix = new int[matrixWidth][matrixHeight];
+	    this.ratio = Math.min(matrixWidth, matrixHeight) / Math.max(qrWidth + 2, qrHeight + 2); // 计算比例
+	    this.left = (matrixWidth - qrWidth * ratio) / 2 - 1; // 计算左右边距
+	    this.top = (matrixHeight - qrHeight * ratio) / 2 - 1;
 	    
 	    // 生成二维码1位矩阵
 		for(int y = 0; y < qrHeight; y++){ // y轴
@@ -78,17 +77,14 @@ public class QRMatrix {
 	/**
 	 * 半透明色块
 	 */
-	private void translucentColor(QRCode qrcode, int width, int height){
-	    this.matrixWidth = width;
-	    this.matrixHeight = height;
-	    
+	private void translucentColor(QRCode qrcode){
 	    int qrwidth = qrcode.getWidth();
 	    int qrheight = qrcode.getHeight();
 	    
-	    this.imageMeatrix = new int[width][height];
-	    this.ratio = Math.min(width, height) / Math.max((qrwidth + 2) * 3, (qrheight + 2) * 3);
-	    this.left = (width - qrwidth * ratio * 3) / 2 - 1 * 3;
-	    this.top = (height - qrheight * ratio * 3) / 2 - 1 * 3;
+	    this.imageMeatrix = new int[matrixWidth][matrixHeight];
+	    this.ratio = Math.min(matrixWidth, matrixHeight) / Math.max((qrwidth + 2) * 3, (qrheight + 2) * 3);
+	    this.left = (matrixWidth - qrwidth * ratio * 3) / 2 - 1 * 3;
+	    this.top = (matrixHeight - qrheight * ratio * 3) / 2 - 1 * 3;
 		
 	    // 生成二维码9位矩阵
 		for(int y = 0; y < qrheight; y++){ // y轴
@@ -119,6 +115,10 @@ public class QRMatrix {
 									imageMeatrix[(y * 3 + cy) * ratio  + ry + top][(x * 3 + cx) * ratio + rx + left] = QRColor.White30;
 								}else if(colortyle == QRColor.White80){
 									imageMeatrix[(y * 3 + cy) * ratio  + ry + top][(x * 3 + cx) * ratio + rx + left] = QRColor.White80;
+								}else if(colortyle == QRColor.PointBlack80){
+									if(cy == 1 && cx == 1) imageMeatrix[(y * 3 + cy) * ratio  + ry + top][(x * 3 + cx) * ratio + rx + left] = QRColor.Black80;
+								}else if(colortyle == QRColor.PointWhite80){
+									if(cy == 1 && cx == 1) imageMeatrix[(y * 3 + cy) * ratio  + ry + top][(x * 3 + cx) * ratio + rx + left] = QRColor.White80;
 								}
 							}
 						}

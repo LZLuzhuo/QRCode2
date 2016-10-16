@@ -19,5 +19,5 @@ package me.luzhuo.qrcode2.encode;
  *
  */
 public class QRColor {
-	public static final int Empty = 0x000, White = 0x001, Black = 0x002, White80 = 0x003, Black80 = 0x004, White30 = 0x005, Black30 = 0x006;
+	public static final int Empty = 0x000, White = 0x001, Black = 0x002, White80 = 0x003, Black80 = 0x004, White30 = 0x005, Black30 = 0x006, PointBlack80 = 0x007, PointWhite80 = 0x008;
 }

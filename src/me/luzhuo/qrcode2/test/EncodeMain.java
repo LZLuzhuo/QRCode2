@@ -24,6 +24,7 @@ import me.luzhuo.qrcode2.encode.QRGraphical;
 import me.luzhuo.qrcode2.encode.QRMatrix;
 import me.luzhuo.qrcode2.encode.QRStyle;
 import me.luzhuo.qrcode2.encode.QRStyle.QRStyles;
+import me.luzhuo.qrcode2.utils.QRUtils;
 import me.luzhuo.qrcode2.encode.QRWriteToFile;
 
 /**
@@ -33,32 +34,38 @@ import me.luzhuo.qrcode2.encode.QRWriteToFile;
  */
 public class EncodeMain {
 	private static String contents = "ZXing 二维码内容1234!"; // 二维码内容 
-	private static int width = 800; // 二维码图片宽度
-	private static int height = 800; // 二维码图片高度
+	private static int width = 430; // 二维码图片宽度
+	private static int height = 430; // 二维码图片高度
 	private static File savefile = new File("C:\\我的电脑\\" + File.separator + System.currentTimeMillis() + ".png"); // 保存文件
 	private static File basemapfile =  new File("C:\\我的电脑\\logo.jpg"); // 底图
 	private static File logofile = new File("C:\\我的电脑\\logo.jpg"); // logo
 	
 	public static void main(String[] args) throws WriterException, IOException {
+		// 计算底图的尺寸, 可以根据底图的尺寸计算二维码的大小, 没有该需求则不需要
+		int[] size = QRUtils.getImageFilePxSize(basemapfile);
+		if(size == null) return;
+		width = size[0]; height = size[1];
+		
     	// 1. 创建QRCode源数据组
     	QRCode qrcode = new QRCode().createQRCode(contents);
     	
     	// 2. 样式类处理QRCode源数据组
-    	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.Default);
+    	QRStyle qrstyle = new QRStyle(qrcode, QRStyles.Default);
     	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.OnlyBlack);
     	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultTranslucent);
-    	QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultTranslucentBorder);
+    	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultTranslucentBorder);
+    	// QRStyle qrstyle = new QRStyle(qrcode, QRStyles.DefaultPoint);
     	
     	// 3. 将QRCode生成图形数据阵
     	QRMatrix qrMatrix = new QRMatrix().createMatrix(qrcode, width, height, qrstyle);
     	
     	// 4. 将图形数据阵生成图形
-    	//QRGraphical qrGraphical = new QRGraphical().decode(qrMatrix);
+    	// QRGraphical qrGraphical = new QRGraphical().decode(qrMatrix);
     	QRGraphical qrGraphical = new QRGraphical().decode(qrMatrix, basemapfile);
     	
     	// 5. 将生成的图形写入文件
-    	// new QRWriteToFile().writeToFile(qrGraphical, savefile);
-    	new QRWriteToFile().writeToFile(qrGraphical, savefile, logofile);
+    	new QRWriteToFile().writeToFile(qrGraphical, savefile);
+    	// new QRWriteToFile().writeToFile(qrGraphical, savefile, logofile);
 	}
 
 }
