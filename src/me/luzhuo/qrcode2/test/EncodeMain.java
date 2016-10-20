@@ -34,10 +34,10 @@ import me.luzhuo.qrcode2.encode.QRWriteToFile;
  */
 public class EncodeMain {
 	private static String contents = "作者:Luzhuo   博客:http://blog.csdn.net/Rozol   Github:https://github.com/lzluzhuo"; // 二维码内容 
-	private static int width = 340; // 二维码图片宽度
-	private static int height = 340; // 二维码图片高度
+	private static int width = 800; // 二维码图片宽度
+	private static int height = 800; // 二维码图片高度
 	private static File savefile = new File("C:\\我的电脑\\" + File.separator + System.currentTimeMillis() + ".png"); // 保存文件
-	private static File basemapfile =  new File("C:\\我的电脑\\logo2.jpg"); // 底图
+	private static File basemapfile =  new File("C:\\我的电脑\\logo.jpg"); // 底图
 	private static File logofile = new File("C:\\我的电脑\\logo.jpg"); // logo
 	
 	public static void main(String[] args) throws WriterException, IOException {
